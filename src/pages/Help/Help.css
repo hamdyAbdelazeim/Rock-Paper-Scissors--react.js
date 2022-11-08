@@ -1,0 +1,14 @@
+/* landPage */
+.landPage {
+  width: 100%;
+  height: auto;
+}
+.landPage .header {
+  /* color: red; */
+  /* background-color: black; */
+  text-align: center;
+  font-size: 70px;
+  margin-top: 20px;
+}
+
+

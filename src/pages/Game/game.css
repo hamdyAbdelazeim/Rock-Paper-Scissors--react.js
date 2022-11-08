@@ -1,0 +1,125 @@
+.game {
+  /* margin-top: 20px; */
+  padding: 80px;
+  /* width: 100%; */
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* header  */
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 50px;
+}
+.header strong {
+  /* color:; */
+}
+/* top */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+}
+.top p {
+  font-weight: bold;
+}
+.top .computer {
+  text-align: center;
+}
+
+.top .computer p:first-child {
+  width: 120px;
+  background-color: #069199;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 20px;
+  font-size: 30px;
+}
+.top .player {
+  text-align: center;
+}
+.top .player p:first-child {
+  width: 120px;
+  background-color: #069199;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 20px;
+  font-size: 30px;
+}
+.score {
+  font-size: 40px;
+  padding: 20px;
+  /* color: red; */
+}
+
+/* middle */
+.middle {
+  /* background-color:white */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* flex-wrap: wrap; */
+  /* background-color: green; */
+}
+
+.bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.bottom button {
+  background-color: #069199;
+  border: none;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.reflex {
+  transform: rotatey(180deg);
+}
+/* the game style */
+.move-game {
+  -webkit-animation: mover 0.2s 10 alternate;
+  animation: mover 0.2s 10 alternate;
+}
+.rotate {
+  transform: rotate(90deg);
+}
+.rotateOne {
+  transform: rotate(90deg);
+}
+.red {
+  /* color: #063170; */
+}
+@-webkit-keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+/* break poients screen  */
+@media only screen and (max-width: 768px) {
+  .hand {
+    width: 100px;
+  }
+  .bottom button {
+    font-size: 10px;
+  }
+}
