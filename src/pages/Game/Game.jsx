@@ -3,11 +3,8 @@ import './game.css'
 import rock from '../../media/rock.png'
 import paper from '../../media/paper.png'
 import scissors from '../../media/scissors.png'
-import { FaHandRock, FaHandPaper, FaHandScissors } from 'react-icons/fa'
 function Game() {
   const gameArr = [rock, paper, scissors]
-  // console.log(rock.title)
-  // console.log(gameArr)
   const [srcPlayer, setSrcPlayer] = useState(rock)
   const [srcComputer, setSrcComputer] = useState(rock)
   const [status, setStatus] = useState('')

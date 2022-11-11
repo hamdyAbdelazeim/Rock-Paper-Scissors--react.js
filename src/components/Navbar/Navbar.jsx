@@ -9,11 +9,9 @@ import { changeTheme } from '../../App/ThemeSlice'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
-  // const [isdark, setIsDark] = useState(false)
   const [open, setOpen] = useState(true)
   let dark = useSelector((state) => state.theme.isdark)
   const dispatch = useDispatch()
-  console.log(dark)
   return (
     <div>
       <div className='Navbar'>
@@ -78,20 +76,24 @@ function Navbar() {
             Home
           </Link>
         </li>
-        <Link
-          to='/game'
-          className='press'
-          style={{ color: 'white', textDecoration: 'none', fontSize: '25px' }}
-        >
-          Game
-        </Link>
-        <Link
-          to='/help'
-          className='press'
-          style={{ color: 'white', textDecoration: 'none', fontSize: '25px' }}
-        >
-          Help
-        </Link>{' '}
+        <li className='link'>
+          <Link
+            to='/game'
+            className='press'
+            style={{ color: 'white', textDecoration: 'none', fontSize: '25px' }}
+          >
+            Game
+          </Link>
+        </li>
+        <li className='link'>
+          <Link
+            to='/help'
+            className='press'
+            style={{ color: 'white', textDecoration: 'none', fontSize: '25px' }}
+          >
+            Help
+          </Link>
+        </li>
       </ul>
     </div>
   )

@@ -1,0 +1,35 @@
+.error {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.emoji-404 {
+  /* height: 20vh; */
+  position: relative;
+  animation: mymove 2.5s infinite;
+}
+.btn-back {
+  padding: 20px;
+  font-size: 30px;
+  background-color: #069199;
+  border: none;
+  border-radius: 20px;
+}
+
+@keyframes mymove {
+  33% {
+    top: 0px;
+  }
+  66% {
+    top: 20px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.error-page-head {
+  font-size: 30px;
+}
