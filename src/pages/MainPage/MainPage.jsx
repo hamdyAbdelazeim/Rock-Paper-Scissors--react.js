@@ -17,7 +17,7 @@ function MainPage() {
         <h2> Play online</h2>
       </div>
       <div className='buttom'>
-        <button className='btn-play'>
+        <button>
           {' '}
           <Link
             to='/game'
@@ -25,8 +25,7 @@ function MainPage() {
             style={{
               color: 'black',
               textDecoration: 'none',
-
-              fontSize: '30px',
+              fontSize: '20px',
             }}
           >
             start play
