@@ -114,16 +114,6 @@
   }
 }
 
-/* break poients screen  */
-@media only screen and (max-width: 768px) {
-  .hand {
-    width: 100px;
-  }
-  .bottom button {
-    font-size: 10px;
-  }
-}
-
 @keyframes shakePlayer {
   0%,
   100% {
@@ -186,4 +176,25 @@
 
 .celebrate {
   animation: celebrate 0.5s ease-in-out;
+}
+
+/* break poients screen  */
+@media only screen and (max-width: 768px) {
+  .hand {
+    width: 100px;
+  }
+  .bottom button {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .top {
+    justify-content: center;
+  }
+  .bottom {
+    justify-content: space-around;
+  }
+  .bottom img {
+    width: 50px !important;
+  }
 }
