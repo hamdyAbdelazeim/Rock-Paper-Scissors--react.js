@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
+import Confetti from 'react-confetti' // Import Confetti component
 import './game.css'
 import rock from '../../media/rock.png'
 import paper from '../../media/paper.png'
 import scissors from '../../media/scissors.png'
+import celebrationSound from '../../media/get-up-pierrot-atm-notification-94647.mp3' // Add a celebration sound file
 
 function Game() {
   const gameArr = [rock, paper, scissors]
@@ -12,15 +14,18 @@ function Game() {
   const [playerCounter, setPlayerCounter] = useState(0)
   const [computerCounter, setcComputerCounter] = useState(0)
   const [isShaking, setIsShaking] = useState(false)
+  const [isCelebrating, setIsCelebrating] = useState(false) // State for celebration
 
   const audioRef = useRef(null)
+  const celebrationAudioRef = useRef(new Audio(celebrationSound)) // Ref for celebration sound
 
   const playRound = (playerChoice) => {
     setSrcPlayer(rock)
     setSrcComputer(rock)
     setIsShaking(true)
+    setIsCelebrating(false) // Reset celebration state
 
-    // تشغيل الصوت عند بدء الأنيميشن
+    // Play the shaking sound
     if (audioRef.current) {
       audioRef.current.play()
     }
@@ -40,6 +45,8 @@ function Game() {
       ) {
         setStatus('You Win')
         setPlayerCounter(playerCounter + 1)
+        setIsCelebrating(true) // Trigger celebration
+        celebrationAudioRef.current.play() // Play celebration sound
       } else {
         setStatus('Computer Win')
         setcComputerCounter(computerCounter + 1)
@@ -53,7 +60,7 @@ function Game() {
 
   return (
     <div className='game'>
-      <h1 className='header'>
+      <h1 className={`header ${isCelebrating ? 'celebrate' : ''}`}>
         <strong>{status}</strong>
       </h1>
       <div className='top'>
@@ -106,6 +113,7 @@ function Game() {
         />
       </div>
       <audio ref={audioRef} src='https://www.example.com/sound.mp3' />
+      {isCelebrating && <Confetti />} {/* Add Confetti component */}
     </div>
   )
 }
