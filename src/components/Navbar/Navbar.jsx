@@ -9,7 +9,7 @@ import { changeTheme } from '../../App/ThemeSlice'
 import { Link } from 'react-router-dom'
 
 function Navbar() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false) // Initialize open state to false
   let dark = useSelector((state) => state.theme.isdark)
   const dispatch = useDispatch()
   return (
