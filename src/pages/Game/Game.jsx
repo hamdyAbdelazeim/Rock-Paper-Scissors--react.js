@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import './game.css'
 import rock from '../../media/rock.png'
 import paper from '../../media/paper.png'
 import scissors from '../../media/scissors.png'
+
 function Game() {
   const gameArr = [rock, paper, scissors]
   const [srcPlayer, setSrcPlayer] = useState(rock)
@@ -10,78 +11,76 @@ function Game() {
   const [status, setStatus] = useState('')
   const [playerCounter, setPlayerCounter] = useState(0)
   const [computerCounter, setcComputerCounter] = useState(0)
-  const rockBtn = () => {
+  const [isShaking, setIsShaking] = useState(false)
+
+  const audioRef = useRef(null)
+
+  const playRound = (playerChoice) => {
     setSrcPlayer(rock)
-    let i = Math.floor(Math.random() * 3)
-    setSrcComputer(gameArr[i])
-    if (gameArr[i] === rock) {
-      setStatus('tie')
+    setSrcComputer(rock)
+    setIsShaking(true)
+
+    // تشغيل الصوت عند بدء الأنيميشن
+    if (audioRef.current) {
+      audioRef.current.play()
     }
-    if (gameArr[i] === paper) {
-      setStatus('computer win')
-      setcComputerCounter(computerCounter + 1)
-    }
-    if (gameArr[i] === scissors) {
-      setStatus('You win')
-      setPlayerCounter(playerCounter + 1)
-    }
+
+    setTimeout(() => {
+      let i = Math.floor(Math.random() * 3)
+      setSrcComputer(gameArr[i])
+      setSrcPlayer(playerChoice)
+      setIsShaking(false)
+
+      if (gameArr[i] === playerChoice) {
+        setStatus('Tie')
+      } else if (
+        (playerChoice === rock && gameArr[i] === scissors) ||
+        (playerChoice === paper && gameArr[i] === rock) ||
+        (playerChoice === scissors && gameArr[i] === paper)
+      ) {
+        setStatus('You Win')
+        setPlayerCounter(playerCounter + 1)
+      } else {
+        setStatus('Computer Win')
+        setcComputerCounter(computerCounter + 1)
+      }
+    }, 1000)
   }
-  const paperBtn = () => {
-    setSrcPlayer(paper)
-    let i = Math.floor(Math.random() * 3)
-    setSrcComputer(gameArr[i])
-    if (gameArr[i] === rock) {
-      setStatus('You Win ')
-      setPlayerCounter(playerCounter + 1)
-    }
-    if (gameArr[i] === paper) {
-      setStatus('Tie')
-    }
-    if (gameArr[i] === scissors) {
-      setStatus('Computer Win')
-      setcComputerCounter(computerCounter + 1)
-    }
-  }
-  const scissorsBtn = () => {
-    setSrcPlayer(scissors)
-    let i = Math.floor(Math.random() * 3)
-    setSrcComputer(gameArr[i])
-    if (gameArr[i] === rock) {
-      setStatus('Computer Win ')
-      setcComputerCounter(computerCounter + 1)
-    }
-    if (gameArr[i] === paper) {
-      setStatus('You Win')
-      setPlayerCounter(playerCounter + 1)
-    }
-    if (gameArr[i] === scissors) {
-      setStatus('Tie')
-    }
-  }
+
+  const rockBtn = () => playRound(rock)
+  const paperBtn = () => playRound(paper)
+  const scissorsBtn = () => playRound(scissors)
 
   return (
     <div className='game'>
-      <h1 class='header'>
-        {' '}
-        <strong>{status}</strong>{' '}
+      <h1 className='header'>
+        <strong>{status}</strong>
       </h1>
       <div className='top'>
         <div className='computer'>
-          <p>computer</p>
+          <p>Computer</p>
           <p className='score'>
             <strong className='red'>{computerCounter}</strong>
           </p>
         </div>
         <div className='player'>
-          <p>player</p>
+          <p>Player</p>
           <p className='score'>
-            <strong className='red'> {playerCounter}</strong>
+            <strong className='red'>{playerCounter}</strong>
           </p>
         </div>
       </div>
       <div className='middle'>
-        <img src={srcComputer} alt='rock' className={`reflex hand `} />
-        <img src={srcPlayer} alt='rock' className={`hand  `} />
+        <img
+          src={srcComputer}
+          alt='computer hand'
+          className={`reflex hand ${isShaking ? 'shake-computer' : ''}`}
+        />
+        <img
+          src={srcPlayer}
+          alt='player hand'
+          className={`hand ${isShaking ? 'shake-player' : ''}`}
+        />
       </div>
       <div className='bottom'>
         <img
@@ -95,17 +94,18 @@ function Game() {
           width='70px'
           className='rock'
           src='https://www.rpsgame.org/assets/img/paper.svg'
-          alt='rock'
+          alt='paper'
           onClick={paperBtn}
         />
         <img
           width='70px'
           className='rock'
           src='https://www.rpsgame.org/assets/img/scissors.svg'
-          alt='rock'
+          alt='scissors'
           onClick={scissorsBtn}
         />
       </div>
+      <audio ref={audioRef} src='https://www.example.com/sound.mp3' />
     </div>
   )
 }
